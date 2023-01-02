@@ -206,8 +206,8 @@ export default class MainCore {
                 direction.x = Number(moveRight) - Number(moveLeft);
                 direction.normalize(); // this ensures consistent movements in all directions
         
-                if (moveForward || moveBackward) velocity.z -= direction.z * 400.0 * delta;
-                if (moveLeft || moveRight) velocity.x -= direction.x * 400.0 * delta;
+                if (moveForward || moveBackward) velocity.z -= direction.z * 200.0 * delta;
+                if (moveLeft || moveRight) velocity.x -= direction.x * 200.0 * delta;
         
                 controls.moveRight(- velocity.x * delta);
                 controls.moveForward(- velocity.z * delta);
