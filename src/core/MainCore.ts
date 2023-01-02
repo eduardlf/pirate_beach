@@ -12,40 +12,44 @@ let moveRight = false;
 let prevTime = performance.now();
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
-let camera: THREE.Camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+let renderer = new THREE.WebGLRenderer({ antialias: true });
+let camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
 let controls = new PointerLockControls(camera, document.body);
 const blocker = document.getElementById('background_menu')!;
 const instructions = document.getElementById('instructions_menu')!;
 
 export default class MainCore {
     
-    renderer: THREE.WebGLRenderer;
     divGame: HTMLElement;
-    camera: THREE.Camera;
     scene: THREE.Scene;
     
     constructor() {
         this.divGame = document.getElementById('main_game')!;
         
         //render
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.outputEncoding = THREE.sRGBEncoding;
         
-        this.camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 100);
-        this.camera.position.set(0, 0, 5);
-        
-        this.divGame.appendChild(this.renderer.domElement);
+        this.divGame.appendChild(renderer.domElement);
         
         //scene
-        const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0xbfe3dd);
         this.scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
-        this.scene.fog = new THREE.Fog(0xffffff, 0, 500);        
+        this.scene.fog = new THREE.Fog(0xffffff, 0, 500);      
+        
+        const onResize = function () {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        };
 
+        window.addEventListener("resize", onResize);
     }
+
 
     personagem() {
         camera.rotation.y = Math.PI;
@@ -63,20 +67,16 @@ export default class MainCore {
         controls.addEventListener('lock', function () {
             instructions.style.display = 'none';
             blocker.style.display = 'none';
-            
         });
         
         controls.addEventListener('unlock', function () {
             blocker.style.display = 'block';
             instructions.style.display = '';
-    
         });
     
         this.scene.add(controls.getObject());
     
         const onKeyDown = function (event: { code: any; }) {
-    
-            console.log(event.code);
             switch (event.code) {
                 case 'ArrowUp':
                 case 'KeyW':
@@ -97,15 +97,12 @@ export default class MainCore {
                 case 'KeyD':
                     moveRight = true;
                     break;
-    
             }
     
         };
     
         const onKeyUp = function (event: { code: any; }) {
-    
             switch (event.code) {
-    
                 case 'ArrowUp':
                 case 'KeyW':
                     moveForward = false;
@@ -125,9 +122,7 @@ export default class MainCore {
                 case 'KeyD':
                     moveRight = false;
                     break;
-    
             }
-    
         };
     
         document.addEventListener('keydown', onKeyDown);
@@ -194,7 +189,7 @@ export default class MainCore {
 
         this.personagem();
 
-        this.renderer.setAnimationLoop(()=>{
+        renderer.setAnimationLoop(()=>{
 
             const time = performance.now();
             if (controls.isLocked === true) {
@@ -215,7 +210,7 @@ export default class MainCore {
             }
             prevTime = time;
 
-            this.renderer.render(this.scene, camera);
+            renderer.render(this.scene, camera);
         });
     }
 }
