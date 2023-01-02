@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Pirate's beach</title>
+    <link rel="icon" type="image/png" href="/images/icon_leme.png" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+</head>
+
+<body>
+    <div id="main_game">
+        <div id="background_menu">
+            <div id="instructions_menu">
+                <p style="font-size:36px">
+                    <img src='/images/icon_leme.png' style='vertical-align: middle' /> Pirate's beach
+                </p>
+                <p style="font-size:36px">
+                    Click para jogar
+                </p>
+                <p>
+                    Camera: MOUSE<br />
+                    Mover: WASD
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import MainCore from './core/MainCore'
+        const game = new MainCore();
+        game.init();
+    </script>
+</body>
+
+</html>
