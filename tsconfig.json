@@ -1,20 +1,38 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "strict": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true,
-    "types": ["vite/client"]
-  },
-  "include": ["src"]
+    "compilerOptions": {
+        "lib": [
+            "ES5",
+            "ES6",
+            "DOM"
+        ],
+        "target": "ES5",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "rootDirs": [
+            "./src/core",
+            "./src/cenarios"
+        ],
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/types"
+        ],
+        "types": [
+            "vite/client"
+        ],
+        "useDefineForClassFields": true,
+        "strict": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "noEmit": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "skipLibCheck": true,
+    },
+    "include": [
+        "src/core/*.ts",
+        "src/cenarios/*.ts",
+        "src/types/*.d.ts"
+    ]
 }

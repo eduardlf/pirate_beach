@@ -1,36 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="h-100">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Pirate's beach</title>
-    <link rel="icon" type="image/png" href="/images/icon_leme.png" />
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/icon_leme.png" />
+    <title>Pirate's beach</title>
+    <link rel="stylesheet" href="scss/styles.scss">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script type="module">
+        import '/scss/styles.scss'
+        import { Dropdown, Offcanvas } from 'bootstrap';
+        import Index from './core/Index'
+        const index = new Index();
+        index.debug();
+    </script>
 </head>
-
-<body>
-    <div id="main_game">
-        <div id="background_menu">
-            <div id="instructions_menu">
-                <p style="font-size:36px">
-                    <img src='/images/icon_leme.png' style='vertical-align: middle' /> Pirate's beach
-                </p>
-                <p style="font-size:36px">
-                    Click para jogar
-                </p>
-                <p>
-                    Camera: MOUSE<br />
-                    Mover: WASD
-                </p>
+<body class="d-flex h-100 w-100">
+    <audio id="test" preload="auto" style="display: none">
+        <source src="sounds/test.mp3" type="audio/mpeg">
+    </audio>
+    <div id="divPai" class="container d-flex w-100 h-100 py-4 px-3 mx-auto flex-column">
+        <header class="pb-3 mb-3 border-bottom">
+            <div class="container justify-content-between align-items-md-center">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="h4">
+                            <a class="d-flex align-items-center text-dark text-decoration-none">
+                                <img class="d-inline-block me-2" width="40" height="32" src="/images/icon_leme.png">
+                                <span>Pirate's beach</span>
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="col">
+                        <nav class="nav nav-masthead justify-content-center float-md-end">
+                            
+                            <button class="btn btn-secondary me-3" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasExample">Menu
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="h-100 bg-dark rounded-3" id="windowGame" style="overflow: hidden;">
+        <iframe id="frameGame" src="game.html" class="h-100 w-100">
+            </iframe>
+        </main>
+        <footer class="mt-auto bg-light">
+            <hr class="mt-3 mb-3">
+            <p class="text-muted">Licensed MIT.</p>
+        </footer>
+    </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu de cenarios</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                Aqui possui algumas cenarios do jogo
+            </div>
+            <div class="dropdown mt-3">
+                <button name="iniciar" class="butCenario btn btn-primary" type="button">
+                    Iniciar
+                </button>
+                <button name="debug" class="butCenario btn btn-primary" type="button">
+                    Debug
+                </button>
+                <!-- <button name="break" class="butCenario btn btn-primary" type="button">
+                    Break
+                </button>
+                <button name="phisical" class="butCenario btn btn-primary" type="button">
+                    Phisical
+                </button> -->
+                <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown">
+                    Cenas
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul> -->
             </div>
         </div>
     </div>
-    <script type="module">
-        import MainCore from './core/MainCore'
-        const game = new MainCore();
-        game.init();
-    </script>
 </body>
 
 </html>

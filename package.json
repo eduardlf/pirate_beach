@@ -1,21 +1,25 @@
 {
-  "name": "pirate_beach",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build && ncp src/models dist/models && ncp src/images dist/images",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@types/three": "^0.147.1",
-    "ncp": "^2.0.0",
-    "typescript": "^4.9.3",
-    "vite": "^4.0.0"
-  },
-  "dependencies": {
-    "rxjs": "^7.8.0",
-    "three": "^0.148.0"
-  }
+    "name": "pirate_beach",
+    "private": true,
+    "version": "0.0.0",
+    "type": "commonjs",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build && ncp src/models dist/models && ncp src/images dist/images",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "@types/bootstrap": "^5.2.6",
+        "@types/three": "^0.147.1",
+        "ncp": "^2.0.0",
+        "sass": "^1.57.1",
+        "typescript": "^4.9.3",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "bootstrap": "^5.2.3",
+        "lil-gui": "^0.17.0",
+        "rxjs": "^7.8.0",
+        "three": "0.148.0"
+    }
 }
